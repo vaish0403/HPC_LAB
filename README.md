@@ -1,1 +1,2 @@
-# HPC_lab
+# 2018BTECS00060
+HPC Lab Assignment submission Repository
