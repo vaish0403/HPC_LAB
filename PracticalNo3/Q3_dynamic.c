@@ -15,23 +15,19 @@ when changing the size of your matrix. Analyze the speedup.
 //size of matrix = 50*40 = 2000
 #define N 50 /* number of rows */
 #define M 40 /* number of columns */
-#define threads_cnt 16
 
 int main (int argc, char *argv[])
 {
-    clock_t start, end;
-  
-    /* Recording the starting clock tick.*/
-    start = clock();
 
     int tid, nthreads, i, j, k;
     int a[N][M], b[N][M], c[N][M];
+	double time = omp_get_wtime();
     /*** Create a parallel region explicitly scoping all variables ***/
 
-    omp_set_num_threads(threads_cnt);
+    //omp_set_num_threads(8);
 
-    int n_per_thread = N*M / threads_cnt;
-    printf("\nNumber of Threads : %d",threads_cnt);
+    int n_per_thread = N*M / omp_get_max_threads();
+    printf("\nNumber of Threads : %d",omp_get_max_threads());
     printf("\nChunk Size : %d\n\n",n_per_thread);
     #pragma omp parallel default(shared) 
     {
@@ -100,8 +96,8 @@ int main (int argc, char *argv[])
     
     printf("\n");
 
-    end = clock();
-    double time_taken = (double)(end - start) / (double)(CLOCKS_PER_SEC);
-    printf("\nTime taken : %0.4f\n",time_taken);
+    printf ("\nTime Taken %f Seconds",omp_get_wtime() - time); 
+	printf("\nUsing %d Threads",omp_get_max_threads());
+  
     return(0);
 }
