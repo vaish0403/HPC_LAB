@@ -32,6 +32,4 @@ int main(int argc, char* argv)
 
      pi=(double)count/niter*4;
      printf("# of trials= %d , estimate of pi is %g \n",niter,pi);
-	printf ("\nDone In %f Seconds",omp_get_wtime() - time);
-	printf("\n Using %d Threads",omp_get_max_threads());
 }
