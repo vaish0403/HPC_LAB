@@ -1,4 +1,4 @@
-
+%%writefile cuda1.cu
 #include<stdio.h>
 #include<stdlib.h>
 
