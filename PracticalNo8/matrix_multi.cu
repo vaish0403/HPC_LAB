@@ -1,3 +1,4 @@
+%%writefile cuda81.cu
 #include<stdio.h>
 #include<cuda.h>
 #define row1 2 /* Number of rows of first matrix */
