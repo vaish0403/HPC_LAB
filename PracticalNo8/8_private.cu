@@ -17,13 +17,13 @@ int i;
 printf("\n Six elements of first array: ");
 for(i=0;i<6;i++)
 {
-a[i]=i;
+a[i]=i+2;
 printf("%d ",a[i]);
 }
 printf("\n Six elements of second array: ");
 for(i=0;i<6;i++)
 {
-b[i]=i+1;
+b[i]=i+5;
 printf("%d ",b[i]);
 }
 cudaMalloc((void **)&d,6*sizeof(int));
