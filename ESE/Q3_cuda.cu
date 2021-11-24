@@ -8,20 +8,17 @@ __global__ void arradd(int *x,int *y, int *z)    //kernel definition
 {
   int id=blockIdx.x; 
 /* blockIdx.x gives the respective block id which starts from 0 */
-  z[id]=x[id]+y[id];
+  z[id]=x[0]+y[id];
 }
 
 int main()
 {
-    int a[6];
+    int a[1];
     int b[6];
     int c[6];
     int *d,*e,*f;
     int i;
-    for(i=0;i<6;i++)
-    {
-        a[i]=sc;
-    }
+   a[0]=sc;
     printf("Scalar: %d", sc);
 	printf("\nVector: ");
         for(i=0;i<6;i++)
@@ -30,13 +27,16 @@ int main()
 					    printf("%d ", b[i]);
         }
 
-    cudaMalloc((void **)&d,6*sizeof(int));
+
+    cudaMalloc((void **)&d,sizeof(int));
     cudaMalloc((void **)&e,6*sizeof(int));
     cudaMalloc((void **)&f,6*sizeof(int));
 
- cudaMemcpy(d,a,6*sizeof(int),cudaMemcpyHostToDevice);   
+ cudaMemcpy(d,a,sizeof(int),cudaMemcpyHostToDevice);   
  cudaMemcpy(e,b,6*sizeof(int),cudaMemcpyHostToDevice);
  
+
+
 arradd<<<6,1>>>(d,e,f); 
 
  cudaMemcpy(c,f,6*sizeof(int),cudaMemcpyDeviceToHost);
@@ -46,6 +46,8 @@ printf("\nSum :\n ");
     {
         printf("%d\t",c[i]);
     }
+
+
     cudaFree(d);
     cudaFree(e);
     cudaFree(f);
